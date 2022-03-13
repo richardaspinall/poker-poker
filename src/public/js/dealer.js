@@ -40,8 +40,4 @@ async function dealCards(seatNumber, holeCards, playerSeatNumbers) {
   }
 }
 
-function foldCards(seat) {
-  document.querySelector(`#${seat} .hole-cards`).remove();
-}
-
-export { dealCards, foldCards };
+export { dealCards };
