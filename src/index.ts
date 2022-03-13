@@ -5,6 +5,7 @@ import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
 
 import registerTableHandlers from './TableHandlers';
+import registerPlayerActionHandlers from './PlayerActionHandlers';
 
 const app = express();
 const httpServer = createServer(app);
@@ -19,6 +20,7 @@ const io = new Server(httpServer, {
 
 const onConnection = (socket: Socket) => {
   registerTableHandlers(io, socket);
+  registerPlayerActionHandlers(io, socket);
 };
 
 io.on('connection', onConnection);

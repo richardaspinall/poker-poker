@@ -3,14 +3,21 @@ import { Socket } from 'socket.io';
 export default class Player {
   holeCards = {};
   socket: Socket;
-  ready: boolean;
-  constructor(socket: Socket, ready: boolean) {
+  isReady: boolean;
+  constructor(socket: Socket, isReady: boolean) {
     this.socket = socket;
-    this.ready = ready;
+    this.isReady = isReady;
   }
 
   setHoleCards(holeCards: any) {
     this.holeCards = holeCards;
-    this.socket.emit('cards', this.holeCards);
+  }
+
+  setIsReady(isReady: boolean) {
+    this.isReady = isReady;
+  }
+
+  removeHoleCards() {
+    this.holeCards = {};
   }
 }

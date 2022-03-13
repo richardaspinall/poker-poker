@@ -1,3 +1,4 @@
+import { Socket } from 'socket.io';
 import Player from './Player';
 import Seat from './Seat';
 
@@ -23,15 +24,23 @@ export default class Table {
     }
   }
 
-  getPlayers() {
+  getAllPlayers(): Player[] {
     const players: Player[] = [];
     this.seats.forEach((seat: Seat) => {
       if (seat.player) {
         players.push(seat.player);
       }
     });
-    if (players) {
-      return players;
+    return players;
+  }
+
+  getPlayer(socket: Socket): Player | null {
+    for (const seat of this.seats) {
+      if (seat.player?.socket == socket) {
+        return seat.player;
+      }
     }
+
+    return null;
   }
 }
