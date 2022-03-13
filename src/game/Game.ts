@@ -3,7 +3,7 @@ import Dealer from './Dealer';
 import Table from './Table';
 
 export default class Game {
-  public static start(table: Table) {
+  public static startHand(table: Table) {
     const players = table.getPlayers();
     if (players) {
       Dealer.dealCards(players);
