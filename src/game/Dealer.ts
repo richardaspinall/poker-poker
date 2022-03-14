@@ -1,8 +1,9 @@
+import Table from '../table/Table';
 import Hand from './Hand';
 
 export default class Dealer {
-  public static deal(hand: Hand) {
-    const seats = hand.table.seats;
+  public static deal(hand: Hand, table: Table) {
+    const seats = table.seats;
     const playerSeatNumbers: string[] = [];
 
     seats.forEach((seat) => {
@@ -11,7 +12,7 @@ export default class Dealer {
       }
     });
 
-    const players = hand.table.getAllPlayers();
+    const players = table.getAllPlayers();
 
     players.forEach((player) => {
       player.setHoleCards({

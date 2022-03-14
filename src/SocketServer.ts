@@ -1,9 +1,10 @@
 import { Server as HttpServer } from 'http';
 import { Server as IOServer, Socket } from 'socket.io';
-import eventHandler from './game/event-handler';
+import registerPlayerEvents from './player/PlayerEvents';
+import registerTableEvents from './table/TableEvents';
 
 export default class SocketServer {
-  static io: IOServer;
+  private static io: IOServer;
 
   public static getInstance() {
     return SocketServer.io;
@@ -16,8 +17,8 @@ export default class SocketServer {
       });
 
       const onConnection = (socket: Socket) => {
-        eventHandler.registerTableEvents(this.io, socket);
-        eventHandler.registerPlayerEvents(this.io, socket);
+        registerTableEvents(this.io, socket);
+        registerPlayerEvents(this.io, socket);
       };
 
       this.io.on('connection', onConnection);
@@ -26,7 +27,7 @@ export default class SocketServer {
     }
   }
 
-  //   public emitTable(tableName) {
-  //     this.io.to(tableName).emit('player:fold', seatNumber);
-  //   }
+  public static emitToTable(event: string, tableName: string, args: object) {
+    this.io.to(tableName).emit(event, args);
+  }
 }

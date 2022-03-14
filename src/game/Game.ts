@@ -1,34 +1,16 @@
 import Dealer from './Dealer';
 import Hand from './Hand';
-import Table from './Table';
-import Player from './Player';
+import Table from '../table/Table';
+import Player from '../player/Player';
 
 export default class Game {
-  public static checkPlayersAreReady(table: Table) {
-    const players = table.getAllPlayers();
-
-    let count = 0;
-    if (players) {
-      players.forEach((player) => {
-        if (player.isReady) {
-          count++;
-        }
-      });
-    }
-
-    if (count > 1) {
-      return true;
-    }
-    return false;
-  }
-
   public static newHand(table: Table) {
     const players = table.getAllPlayers();
     const deck = ['AS', 'AD', 'AC', 'AH', 'KS', 'KD', 'KS', 'KC', 'QS', 'QH', 'QD', 'QC'];
-    const hand = new Hand(deck, table, players[0]);
+    const hand = new Hand(deck);
 
     if (players) {
-      Dealer.deal(hand);
+      Dealer.deal(hand, table);
     }
   }
 

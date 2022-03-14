@@ -20,8 +20,9 @@ document.getElementById('ready-action').addEventListener('click', function() {
   socket.emit('player:ready', tableNumber);
 });
 
-socket.on('table:join', (playerSeatNumber) => {
-  const seat = document.getElementById(playerSeatNumber);
+socket.on('table:join', (event) => {
+  console.log('TEST');
+  const seat = document.getElementById(event.seat);
   seat.innerHTML = `
   <div class="player">
       <div class="head"></div>
@@ -38,8 +39,8 @@ socket.on('cards', (holeCards, playerSeatNumbers) => {
   dealCards(seatNumber, holeCards, playerSeatNumbers);
 });
 
-socket.on('player:fold', (playerSeatNumber) => {
-  document.getElementById(playerSeatNumber).innerHTML = `
+socket.on('player:fold', (event) => {
+  document.getElementById(event.seat).innerHTML = `
   <div class="player">
       <div class="head"></div>
       <div class="body"></div>

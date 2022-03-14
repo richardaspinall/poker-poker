@@ -1,10 +1,13 @@
 import { Socket } from 'socket.io';
-import Player from './Player';
+import Hand from '../game/Hand';
+import Player from '../player/Player';
 import Seat from './Seat';
 
 export default class Table {
   tableName: string;
   seats: Seat[];
+  hand?: Hand;
+  actingPlayer?: Player;
 
   constructor(tableName: string, numSeats: number) {
     this.tableName = tableName;
@@ -12,6 +15,22 @@ export default class Table {
     for (let seatNumber = 1; seatNumber <= numSeats; seatNumber++) {
       this.seats.push(new Seat(`seat-${seatNumber}`));
     }
+  }
+
+  setHand(hand: Hand) {
+    this.hand = hand;
+  }
+
+  getHand() {
+    return this.hand;
+  }
+
+  setActingPlayer(actingPlayer: Player) {
+    this.actingPlayer = actingPlayer;
+  }
+
+  getActingPlayer(): Player | undefined {
+    return this.actingPlayer;
   }
 
   addPlayer(seatNumber: string, player: Player) {
@@ -40,5 +59,23 @@ export default class Table {
       }
     });
     return players;
+  }
+
+  checkPlayersAreReady(): boolean {
+    const players = this.getAllPlayers();
+
+    let count = 0;
+    if (players) {
+      players.forEach((player) => {
+        if (player.isReady) {
+          count++;
+        }
+      });
+    }
+
+    if (count > 1) {
+      return true;
+    }
+    return false;
   }
 }

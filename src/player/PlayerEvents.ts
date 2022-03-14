@@ -1,8 +1,8 @@
 import { Server, Socket } from 'socket.io';
 
-import tablesRepo from '../tablesRepo';
+import tablesRepo from '../table/TableRepo';
 
-import Game from '../Game';
+import GameController from '../game/GameController';
 
 export default (io: Server, socket: Socket) => {
   const playerReady = (tableName: string) => {
@@ -13,9 +13,7 @@ export default (io: Server, socket: Socket) => {
       if (player) {
         player.setIsReady(true);
       }
-      if (Game.checkPlayersAreReady(table)) {
-        Game.newHand(table);
-      }
+      GameController.emit('player:ready', table);
     }
   };
 
@@ -25,9 +23,7 @@ export default (io: Server, socket: Socket) => {
     if (table) {
       const player = table.getPlayer(socket);
       if (player) {
-        player.removeHoleCards();
-        io.to(tableName).emit('player:fold', seatNumber);
-        Game.endTurn(player, table);
+        GameController.emit('player:fold', player, table, seatNumber);
       }
     }
   };
