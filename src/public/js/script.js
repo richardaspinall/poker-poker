@@ -21,7 +21,6 @@ document.getElementById('ready-action').addEventListener('click', function() {
 });
 
 socket.on('table:join', (event) => {
-  console.log('TEST');
   const seat = document.getElementById(event.seat);
   seat.innerHTML = `
   <div class="player">
@@ -50,4 +49,8 @@ socket.on('player:fold', (event) => {
       <div class="card-2"></div>
   </div>
   `;
+});
+
+socket.on('error', () => {
+  console.log('ERROR');
 });
