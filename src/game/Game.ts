@@ -16,7 +16,7 @@ export default class Game {
       });
     }
 
-    if (count == 3) {
+    if (count > 1) {
       return true;
     }
     return false;

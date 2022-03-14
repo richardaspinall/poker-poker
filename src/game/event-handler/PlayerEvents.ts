@@ -1,12 +1,12 @@
 import { Server, Socket } from 'socket.io';
 
-import { getTable } from './TableEvents';
+import tablesRepo from '../tablesRepo';
 
 import Game from '../Game';
 
 export default (io: Server, socket: Socket) => {
   const playerReady = (tableName: string) => {
-    const table = getTable(tableName);
+    const table = tablesRepo.getTable(tableName);
 
     if (table) {
       const player = table.getPlayer(socket);
@@ -18,8 +18,9 @@ export default (io: Server, socket: Socket) => {
       }
     }
   };
+
   const playerFold = (tableName: string, seatNumber: string) => {
-    const table = getTable(tableName);
+    const table = tablesRepo.getTable(tableName);
 
     if (table) {
       const player = table.getPlayer(socket);
