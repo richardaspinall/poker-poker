@@ -1,11 +1,11 @@
 import { Server, Socket } from 'socket.io';
 
-import Table from './game/Table';
-import Player from './game/Player';
-import Game from './game/GameController';
+import Table from '../Table';
+import Player from '../Player';
+import Game from '../Game';
 
 // tables is just an array of two Tables for now
-import tables from './game/tables';
+import tables from '../tables';
 
 export default (io: Server, socket: Socket) => {
   const tableView = (tableName: string) => {

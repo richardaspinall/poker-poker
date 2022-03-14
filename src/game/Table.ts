@@ -15,23 +15,11 @@ export default class Table {
   }
 
   addPlayer(seatNumber: string, player: Player) {
-    const seat: Seat | undefined = this.seats.find((element) => element.seatNumber === seatNumber);
-
-    if (seat) {
-      seat.addPlayer(player);
-    } else {
-      throw new Error('Seat not found');
-    }
-  }
-
-  getAllPlayers(): Player[] {
-    const players: Player[] = [];
-    this.seats.forEach((seat: Seat) => {
-      if (seat.player) {
-        players.push(seat.player);
+    for (const seat of this.seats) {
+      if (seat.seatNumber == seatNumber) {
+        seat.addPlayer(player);
       }
-    });
-    return players;
+    }
   }
 
   getPlayer(socket: Socket): Player | null {
@@ -42,5 +30,15 @@ export default class Table {
     }
 
     return null;
+  }
+
+  getAllPlayers(): Player[] {
+    const players: Player[] = [];
+    this.seats.forEach((seat: Seat) => {
+      if (seat.player) {
+        players.push(seat.player);
+      }
+    });
+    return players;
   }
 }

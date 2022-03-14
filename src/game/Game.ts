@@ -15,8 +15,8 @@ export default class Game {
         }
       });
     }
-    console.log(count);
-    if (count == 5) {
+
+    if (count == 3) {
       return true;
     }
     return false;

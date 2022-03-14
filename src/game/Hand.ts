@@ -5,6 +5,7 @@ export default class Hand {
   deck: string[];
   table: Table;
   actingPlayer: Player;
+
   constructor(deck: string[], table: Table, actingPlayer: Player) {
     this.deck = deck;
     this.table = table;
