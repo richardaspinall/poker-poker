@@ -1,6 +1,6 @@
 import { Server, Socket } from 'socket.io';
 
-import { getTable } from './TableHandlers';
+import { getTable } from './TableEvents';
 
 import Game from '../Game';
 

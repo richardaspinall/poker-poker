@@ -1,4 +1,4 @@
-import registerTableHandlers from './TableHandlers';
-import registerPlayerActionHandlers from './PlayerActionHandlers';
+import registerTableEvents from './TableEvents';
+import registerPlayerEvents from './PlayerEvents';
 
-export default { registerTableHandlers, registerPlayerActionHandlers };
+export default { registerTableEvents, registerPlayerEvents };
