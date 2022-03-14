@@ -1,4 +1,5 @@
 import { Socket } from 'socket.io';
+import Table from '../table/Table';
 
 export default class Player {
   holeCards = {};
@@ -18,7 +19,19 @@ export default class Player {
     this.holeCards = holeCards;
   }
 
-  removeHoleCards() {
-    this.holeCards = {};
+  fold(table: Table) {
+    if (table.actingPlayer == this) {
+      this.holeCards = {};
+    } else {
+      throw Error('Not your turn');
+    }
+  }
+
+  call(table: Table) {
+    console.log('Player calls');
+  }
+
+  raise(table: Table, amount: number) {
+    console.log('Player raise');
   }
 }

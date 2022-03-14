@@ -1,7 +1,6 @@
 import { EventEmitter } from 'events';
 import Game from './Game';
 import SocketServer from '../SocketServer';
-import e from 'express';
 
 class GameController extends EventEmitter {}
 
@@ -22,13 +21,9 @@ gameController.on('player:join', (table) => {
 gameController.on('player:fold', (player, table, seatNumber) => {
   // This logic should go in the Game class, and a TRY CATCH should be done here / error handling
   // For example: the player isn't the acting player
-  if (table.actingPlayer == player) {
-    player.removeHoleCards();
-    SocketServer.emitToTable('player:fold', table.tableName, { seat: seatNumber });
-    Game.endTurn(player, table);
-  } else {
-    player.socket.emit('error');
-  }
+  SocketServer.emitToTable('player:fold', table.tableName, { seat: seatNumber });
+
+  Game.endTurn(player, table);
 });
 
 export default gameController;

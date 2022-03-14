@@ -1,7 +1,7 @@
 import { Server as HttpServer } from 'http';
 import { Server as IOServer, Socket } from 'socket.io';
-import registerPlayerEvents from './player/PlayerEvents';
-import registerTableEvents from './table/TableEvents';
+import registerPlayerEvents from './player/PlayerController';
+import registerTableEvents from './table/TableController';
 
 export default class SocketServer {
   private static io: IOServer;

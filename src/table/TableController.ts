@@ -1,4 +1,5 @@
 import { Server, Socket } from 'socket.io';
+
 import SocketServer from '../SocketServer';
 import GameController from '../game/GameController';
 
@@ -6,12 +7,12 @@ import Player from '../player/Player';
 
 import tablesRepo from './TableRepo';
 
-export default {
-  tableView: (tableName: string, socket: Socket) => {
+export default (io: Server, socket: Socket) => {
+  const tableView = (tableName: string) => {
     socket.join(tableName);
-  },
+  };
 
-  tableJoin: (tableName: string, seatNumber: string, socket: Socket) => {
+  const tableJoin = (tableName: string, seatNumber: string) => {
     const table = tablesRepo.getTable(tableName);
 
     if (table) {
@@ -19,5 +20,9 @@ export default {
       SocketServer.emitToTable('table:join', tableName, { seat: seatNumber });
       GameController.emit('table:join', table);
     }
-  },
+  };
+
+  socket.on('table:view', tableView);
+
+  socket.on('table:join', tableJoin);
 };
