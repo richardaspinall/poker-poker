@@ -21,7 +21,6 @@ export default (io: Server, socket: Socket) => {
   const playerFold = (tableName: string, seatNumber: string) => {
     const table = tablesRepo.getTable(tableName);
 
-    // We should be calling "player.fold" here
     if (table) {
       const player = table.getPlayer(socket);
 
