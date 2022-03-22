@@ -4,10 +4,12 @@ import Table from '../table/Table';
 export default class Player {
   holeCards = {};
   socket: Socket;
+  socketId: string;
   isReady: boolean;
 
   constructor(socket: Socket, isReady: boolean) {
     this.socket = socket;
+    this.socketId = socket.id;
     this.isReady = isReady;
   }
 

@@ -41,9 +41,9 @@ export default class Table {
     }
   }
 
-  getPlayer(socket: Socket): Player | null {
+  getPlayer(socketId: string): Player | null {
     for (const seat of this.seats) {
-      if (seat.player?.socket == socket) {
+      if (seat.player?.socketId == socketId) {
         return seat.player;
       }
     }

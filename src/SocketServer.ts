@@ -1,6 +1,6 @@
 import { Server as HttpServer } from 'http';
 import { Server as IOServer, Socket } from 'socket.io';
-import registerPlayerEvents from './player/PlayerController';
+import registerGameEvents from './game/GameController';
 import registerTableEvents from './table/TableController';
 
 export default class SocketServer {
@@ -18,7 +18,7 @@ export default class SocketServer {
 
       const onConnection = (socket: Socket) => {
         registerTableEvents(this.io, socket);
-        registerPlayerEvents(this.io, socket);
+        registerGameEvents(socket);
       };
 
       this.io.on('connection', onConnection);

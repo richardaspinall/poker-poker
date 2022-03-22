@@ -1,10 +1,8 @@
 import { Server, Socket } from 'socket.io';
 
 import SocketServer from '../SocketServer';
-import GameController from '../game/GameController';
-
+import { GameController } from '../game/GameController';
 import Player from '../player/Player';
-
 import tablesRepo from './TableRepo';
 
 export default (io: Server, socket: Socket) => {
@@ -18,7 +16,7 @@ export default (io: Server, socket: Socket) => {
     if (table) {
       table.addPlayer(seatNumber, new Player(socket, false));
       SocketServer.emitToTable('table:join', tableName, { seat: seatNumber });
-      GameController.emit('table:join', table);
+      GameController.playerJoin(table);
     }
   };
 
