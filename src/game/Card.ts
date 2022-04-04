@@ -6,6 +6,7 @@ export enum Suit {
 }
 
 // Can't reverse look up when setting to a string
+// Might need to change this to an array or objects as per: https://github.com/GeekLaunch/poker/blob/5ac947443bf94399e950c46f7b6446c016eb55c8/ts/Card.ts
 export enum Rank {
   TWO = '2',
   THREE = '3',
