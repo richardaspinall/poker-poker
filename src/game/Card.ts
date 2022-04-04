@@ -1,36 +1,41 @@
-enum Suits {
-  SPADES,
-  HEARTS,
-  DIAMONDS,
-  CLUBS,
+export enum Suit {
+  Spades = 'Spades',
+  Clubs = 'Clubs',
+  Hearts = 'Hearts',
+  Diamonds = 'Diamonds',
 }
 
-enum Rank {
-  TWO = 2,
-  THREE,
-  FOUR,
-  FIVE,
-  SIX,
-  SEVEN,
-  EIGHT,
-  NINE,
-  TEN,
-  JACK,
-  QUEEN,
-  KING,
-  ACE,
+// Can't reverse look up when setting to a string
+export enum Rank {
+  TWO = '2',
+  THREE = '3',
+  FOUR = '4',
+  FIVE = '5',
+  SIX = '6',
+  SEVEN = '7',
+  EIGHT = '8',
+  NINE = '9',
+  TEN = '10',
+  JACK = 'J',
+  QUEEN = 'Q',
+  KING = 'K',
+  ACE = 'A',
 }
 
 export default class Card {
-  suit: Suits;
   rank: Rank;
-  public constructor() {
-    this.suit = Suits.CLUBS;
-    this.rank = Rank['ACE'];
+  suit: Suit;
+  shortCode: string;
+
+  public constructor(rank: Rank, suit: Suit) {
+    this.rank = rank;
+    this.suit = suit;
+
+    this.shortCode = `${rank}${suit.charAt(0)}`;
   }
 
   getSuit() {
-    return Suits[0];
+    return this.suit.charAt(0);
   }
   getSuitName() {
     return this.suit;
@@ -38,5 +43,9 @@ export default class Card {
 
   getRank() {
     return this.rank;
+  }
+
+  getShortCode() {
+    return this.shortCode;
   }
 }

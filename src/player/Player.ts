@@ -1,6 +1,9 @@
 import { Socket } from 'socket.io';
 import Table from '../table/Table';
 
+// This is a model of the player on the table
+// An end user of the system could be on multiple tables
+// and each table would have its own player instance
 export default class Player {
   holeCards = {};
   socket: Socket;
@@ -21,6 +24,8 @@ export default class Player {
     this.holeCards = holeCards;
   }
 
+  // Change to remove hole cards
+  // Error when not your turn should be where we implement and figure out proper error handling
   fold(table: Table) {
     if (table.actingPlayer == this) {
       this.holeCards = {};
@@ -29,6 +34,7 @@ export default class Player {
     }
   }
 
+  // The below two calls will be merged into one and this would simply change the player's chip count
   call(table: Table) {
     console.log('Player calls');
   }

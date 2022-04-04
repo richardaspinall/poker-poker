@@ -18,6 +18,9 @@ export class GameController {
     }
   }
 
+  // This needs to change into a generic "move" or "playerOption" function which calls the implemented
+  // Game option (from the game state)
+  // This will become more apparent when we get to Phase 3 and try implement a new game type
   public static playerFold(socket: Socket, tableName: string, seatNumber: string) {
     const table = tablesRepo.getTable(tableName);
     if (table) {
