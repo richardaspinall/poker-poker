@@ -1,4 +1,4 @@
-export enum Suit {
+enum Suit {
   Spades,
   Clubs,
   Hearts,
@@ -9,7 +9,7 @@ export enum Suit {
 // Might need to change this to an array or objects as per: https://github.com/GeekLaunch/poker/blob/5ac947443bf94399e950c46f7b6446c016eb55c8/ts/Card.ts
 // AND keep an enum for the rank
 // OR a map?
-export enum Rank {
+enum Rank {
   Deuce,
   Three,
   Four,
@@ -29,7 +29,7 @@ export enum Rank {
 type RankMap = {
   readonly [name: string]: string;
 };
-const rankMap: RankMap = {
+const rankShortCodes: RankMap = {
   Deuce: '2',
   Three: '3',
   Four: '4',
@@ -46,11 +46,11 @@ const rankMap: RankMap = {
 };
 
 export default class Card {
-  rank: Rank;
-  suit: Suit;
+  rank: number;
+  suit: number;
   // shortCode: string;
 
-  public constructor(rank: Rank, suit: Suit) {
+  public constructor(rank: number, suit: number) {
     this.rank = rank;
     this.suit = suit;
 
@@ -78,10 +78,6 @@ export default class Card {
   }
 
   getShortCode() {
-    const rank = Rank[this.rank];
-    console.log(rank);
-    console.log(typeof rank);
-    console.log('Deuce');
-    return rankMap[rank];
+    return rankShortCodes[Rank[this.rank]];
   }
 }
