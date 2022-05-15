@@ -1,5 +1,4 @@
 import Card from './Card';
-import { Suit, Rank } from './Card';
 describe('Card test', () => {
   test('create card', async () => {
     // expect(1 + 1).toEqual(2);

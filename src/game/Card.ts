@@ -24,7 +24,15 @@ enum Rank {
   King,
   Ace,
 }
+interface testRank {
+  Deuce: number
+}
+type K1 = keyof testRank;
 
+const test: K1 ={
+  Deuce: 2,
+
+}
 // Index signatures https://www.typescriptlang.org/docs/handbook/2/objects.html#index-signatures
 type RankMap = {
   readonly [name: string]: string;
@@ -48,29 +56,10 @@ const rankShortCodes: RankMap = {
 export default class Card {
   rank: number;
   suit: number;
-  // shortCode: string;
 
   public constructor(rank: number, suit: number) {
     this.rank = rank;
     this.suit = suit;
-
-    // this.shortCode = `${rank}${suit.charAt(0)}`;
-  }
-
-  getRank() {
-    return this.rank;
-  }
-
-  getSuit(): string {
-    return Suit[this.suit].charAt(0);
-  }
-
-  getRankName(): string {
-    return Rank[this.rank];
-  }
-
-  getSuitName(): string {
-    return Suit[this.suit];
   }
 
   getFullName() {
@@ -78,6 +67,6 @@ export default class Card {
   }
 
   getShortCode() {
-    return rankShortCodes[Rank[this.rank]];
+    return `${rankShortCodes[Rank[this.rank]]}${Suit[this.suit].charAt(0)}`;
   }
 }
