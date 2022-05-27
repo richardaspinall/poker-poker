@@ -10,7 +10,6 @@ export default (io: Server, socket: Socket) => {
   };
 
   const tableLeave = (tableName: string, seatNumber: string) => {
-    socket.leave(tableName);
     io.to(tableName).emit('player:left', seatNumber);
   };
 
