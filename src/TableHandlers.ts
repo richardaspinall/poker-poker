@@ -6,12 +6,11 @@ export default (io: Server, socket: Socket) => {
   };
 
   const tableJoin = (tableName: string, seatNumber: string) => {
-    io.to(tableName).emit('table:join', seatNumber);
+    io.to(tableName).emit('player:joined', seatNumber);
   };
 
   const tableLeave = (tableName: string, seatNumber: string) => {
-    socket.leave(tableName);
-    io.to(tableName).emit('table:leave', seatNumber);
+    io.to(tableName).emit('player:left', seatNumber);
   };
 
   socket.on('table:view', tableView);
