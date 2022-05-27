@@ -42,7 +42,7 @@ function leaveTable() {
   addSeatListeners();
 }
 
-// SOCKET INCOMING EVENTS
+/* SOCKET INCOMING EVENTS */
 
 // Player joined the table, display icon
 socket.on('player:joined', (seatId) => {
