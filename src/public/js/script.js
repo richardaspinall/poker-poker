@@ -32,7 +32,10 @@ function joinTable() {
 }
 
 function leaveTable() {
-  socket.emit('table:leave', tableNumber, seatNumber);
+  socket.emit('table:leave', tableNumber, seatNumber, () => {
+    console.log('test');
+  });
+
   const seat = document.getElementById(seatNumber);
   seat.innerHTML = `Empty`;
 
@@ -45,7 +48,8 @@ function leaveTable() {
 /* SOCKET INCOMING EVENTS */
 
 // Player joined the table, display icon
-socket.on('player:joined', (seatId) => {
+socket.on('player:joined', ({ seatId }) => {
+  console.log(seatId);
   const seat = document.getElementById(seatId);
   seat.innerHTML = `
   <div class="player">
@@ -60,7 +64,8 @@ socket.on('player:joined', (seatId) => {
 });
 
 // Player left the table, remove icon
-socket.on('player:left', (seatId) => {
+socket.on('player:left', ({ seatId }) => {
+  console.log(seatId);
   const seat = document.getElementById(seatId);
   seat.innerHTML = `Empty`;
 });

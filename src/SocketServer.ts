@@ -1,6 +1,6 @@
 import { Server as HttpServer } from 'http';
 import { Server as IOServer, Socket } from 'socket.io';
-import registerTableEvents from './TableHandlers';
+import registerEventHandlers from './EventHandlers';
 
 export default class SocketServer {
   private static io: IOServer;
@@ -13,12 +13,16 @@ export default class SocketServer {
       });
 
       const onConnection = (socket: Socket) => {
-        registerTableEvents(this.io, socket);
+        registerEventHandlers(socket);
       };
 
       this.io.on('connection', onConnection);
     } else {
       throw Error('Server already initialized');
     }
+  }
+
+  public static emitToTable(event: string, tableName: string, args: object) {
+    this.io.to(tableName).emit(event, args);
   }
 }
