@@ -16,3 +16,12 @@ export function removePlayerIcon(seatId) {
   const seat = document.getElementById(seatId);
   seat.innerHTML = `Empty`;
 }
+
+export function refreshTableState(table) {
+  table.forEach((seat) => {
+    if (seat.isTaken) {
+      console.log(seat);
+      addPlayerIcon(seat.seatNumber);
+    }
+  });
+}

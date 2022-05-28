@@ -1,7 +1,7 @@
 import SocketClient from './SocketClient.js';
 
 import { joinTable, leaveTable } from './playerActionHandlers.js';
-import { addPlayerIcon, removePlayerIcon } from './clientAnimation.js';
+import { addPlayerIcon, refreshTableState, removePlayerIcon } from './clientAnimation.js';
 
 // Add join table listeners to each seat
 document.querySelectorAll('.seat').forEach((seat) => {
@@ -16,3 +16,6 @@ SocketClient.addSocketEventListener('player:joined', addPlayerIcon);
 
 // Player left the table, remove icon
 SocketClient.addSocketEventListener('player:left', removePlayerIcon);
+
+// Player has joined the table and needs to see the current state of it
+SocketClient.addSocketEventListener('table:refresh', refreshTableState);
