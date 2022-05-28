@@ -3,8 +3,6 @@ import SocketClient from './SocketClient.js';
 let seatNumber;
 let tableName = 'table1';
 
-/* SOCKET OUTGOING EVENTS */
-
 // Automatically emit that a player is viewing the table (hardcoded table number for now)
 SocketClient.emit('table:view', { tableName });
 
