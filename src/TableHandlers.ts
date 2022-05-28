@@ -1,16 +1,23 @@
 import { Server, Socket } from 'socket.io';
 
+type tableDTO = {
+  tableName: string;
+  seatNumber?: string;
+};
 export default (io: Server, socket: Socket) => {
-  const tableView = (tableName: string) => {
-    socket.join(tableName);
+  const tableView = (args: tableDTO) => {
+    const dto = args;
+    socket.join(dto.tableName);
   };
 
-  const tableJoin = (tableName: string, seatNumber: string) => {
-    io.to(tableName).emit('player:joined', seatNumber);
+  const tableJoin = (args: tableDTO) => {
+    const dto = args;
+    io.to(dto.tableName).emit('player:joined', dto.seatNumber);
   };
 
-  const tableLeave = (tableName: string, seatNumber: string) => {
-    io.to(tableName).emit('player:left', seatNumber);
+  const tableLeave = (args: tableDTO) => {
+    const dto = args;
+    io.to(dto.tableName).emit('player:left', dto.seatNumber);
   };
 
   socket.on('table:view', tableView);
